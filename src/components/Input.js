@@ -87,25 +87,6 @@ function Input() {
         setDocs(newNames)
     }
 
-    const startDownloading = event => {
-        event.preventDefault()
-        axios.get('/download', {
-            responseType: 'blob', 
-            headers: {
-                'Content-Type':'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
-            }}).then((res) => {
-                const fileURL = window.URL.createObjectURL(new Blob([res.data]))
-                const fileLink = document.createElement('a');
-                fileLink.href = fileURL;
-                const fileName = 'tytulowa.docx'
-                fileLink.setAttribute('download', fileName);
-                fileLink.setAttribute('target', '_blank');
-                document.body.appendChild(fileLink);
-                fileLink.click()
-                fileLink.remove()
-            })
-    }
-
     return (
         <div className="flex flex-col gap-4">
             <form 
